@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 func Sentinel(identityService string) gin.HandlerFunc {
@@ -20,7 +21,7 @@ func Sentinel(identityService string) gin.HandlerFunc {
 			return
 		}
 
-		if headerParts[0] != "Bearer" {
+		if strings.ToLower(headerParts[0]) != "bearer" {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
